@@ -1,10 +1,11 @@
-package com.leinaro.posts
+package com.leinaro.posts.ui.postsdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.leinaro.posts.R
 
 class PostsDetailsFragment : Fragment() {
 

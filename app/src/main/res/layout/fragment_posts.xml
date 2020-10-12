@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.leinaro.posts.PostsFragment">
+    tools:context="com.leinaro.posts.ui.posts.PostsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts_list"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"

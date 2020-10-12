@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/PostsFragment"
-        android:name="com.leinaro.posts.PostsFragment"
+        android:name="com.leinaro.posts.ui.posts.PostsFragment"
         android:label="@string/posts_fragment_label"
         tools:layout="@layout/fragment_posts">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/PostsDetailsFragment"
-        android:name="com.leinaro.posts.PostsDetailsFragment"
+        android:name="com.leinaro.posts.ui.postsdetails.PostsDetailsFragment"
         android:label="@string/posts_details_fragment_label"
         tools:layout="@layout/fragment_posts_details">
 

@@ -1,4 +1,4 @@
-package com.leinaro.posts
+package com.leinaro.posts.ui.main
 
 import android.os.Bundle
 import android.view.Menu
@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.leinaro.posts.ui.main.SectionsPagerAdapter
+import com.leinaro.posts.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
