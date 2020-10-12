@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">posts</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="posts_fragment_label">Posts Fragment</string>
+    <string name="posts_details_fragment_label">Posts Details Fragment</string>
+    <string name="refresh">refresh</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_all">All</string>
+    <string name="tab_favorites">Favorites</string>
+</resources>
