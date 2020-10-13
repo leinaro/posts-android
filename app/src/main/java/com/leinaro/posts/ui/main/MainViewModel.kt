@@ -15,8 +15,6 @@ import com.leinaro.posts.repository.main.PostRepository
 import com.leinaro.posts.repository.main.ShowAllPosts
 import com.leinaro.posts.ui.main.handler.ShowAllPostsHandler
 import com.leinaro.posts.utils.ViewDataState
-import com.leinaro.posts.utils.ViewHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application): AndroidViewModel(application) {

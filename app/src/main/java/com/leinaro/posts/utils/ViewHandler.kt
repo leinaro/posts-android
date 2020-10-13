@@ -1,7 +1,6 @@
 package com.leinaro.posts.utils
 
 import android.app.Activity
-import android.content.Context
 import androidx.fragment.app.Fragment
 import arrow.core.Either
 

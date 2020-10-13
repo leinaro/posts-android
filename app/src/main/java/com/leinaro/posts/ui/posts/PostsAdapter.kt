@@ -3,11 +3,13 @@ package com.leinaro.posts.ui.posts
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
 import com.leinaro.posts.datasources.remote.Posts
 
-class PostsAdapter(private var postDataset: Array<String>) :
+class PostsAdapter(private var postDataset: Array<Posts>) :
     RecyclerView.Adapter<PostsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup,
@@ -17,14 +19,20 @@ class PostsAdapter(private var postDataset: Array<String>) :
     }
 
     override fun onBindViewHolder(holder: PostsViewHolder, position: Int) {
-        holder.textView.text = postDataset[position]
+        holder.textView.text = postDataset[position].body
+        holder.view.setOnClickListener{
+            val posts = postDataset[position]
+            val bundle = bundleOf("posts" to "")
+            holder.view.findNavController().navigate(
+                R.id.action_PostsFragment_to_PostsDetailsFragment,
+                bundle
+            )
+        }
     }
 
     override fun getItemCount() = postDataset.size
 
     fun setDataSet(postsList: List<Posts>){
-        postDataset = postsList.map {
-            it.body
-        }.toTypedArray()
+        postDataset = postsList.toTypedArray()
     }
 }

@@ -1,13 +1,10 @@
 package com.leinaro.posts.ui.main
 
-import android.content.Context
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.leinaro.posts.ui.posts.PostsFragment
-import com.leinaro.posts.R
-import com.leinaro.posts.datasources.remote.Posts
 
-class SectionsPagerAdapter(private val context: FragmentActivity, private val tabTitles: Array<Int>) : FragmentStateAdapter(context) {
+class SectionsPagerAdapter(private val context: Fragment, private val tabTitles: Array<Int>) : FragmentStateAdapter(context) {
 
     override fun getItemCount(): Int {
         return tabTitles.size

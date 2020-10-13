@@ -3,7 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/PostsFragment">
+    app:startDestination="@id/ViewPagerFragment">
+
+    <fragment
+        android:id="@+id/ViewPagerFragment"
+        android:name="com.leinaro.posts.ui.main.ViewPagerFragment"
+        android:label="@string/posts_fragment_label"
+        tools:layout="@layout/fragment_posts">
+
+        <action
+            android:id="@+id/action_PostsFragment_to_PostsDetailsFragment"
+            app:destination="@id/PostsDetailsFragment" />
+
+
+    </fragment>
 
     <fragment
         android:id="@+id/PostsFragment"
