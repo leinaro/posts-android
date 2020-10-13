@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
+import com.leinaro.posts.datasources.remote.Posts
 import com.leinaro.posts.ui.main.PageViewModel
 import kotlinx.android.synthetic.main.fragment_posts.*
 
@@ -28,7 +29,7 @@ private const val ARG_SECTION_NUMBER = "section_number"
  */
 class PostsFragment : Fragment() {
 
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: PostsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     private lateinit var pageViewModel: PageViewModel
@@ -47,10 +48,7 @@ class PostsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewManager = LinearLayoutManager(this.context)
 
-        val myDataset = arrayOf("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ")
-
-        viewAdapter =
-            PostsAdapter(myDataset)
+        viewAdapter = PostsAdapter(arrayOf())
 
         this.posts_list.apply {
             // use this setting to improve performance if you know that changes
@@ -60,6 +58,11 @@ class PostsFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
             adapter = viewAdapter
         }
+    }
+
+    fun setPosts(postsList: List<Posts>) {
+        viewAdapter.setDataSet(postsList)
+        viewAdapter.notifyDataSetChanged()
     }
 
     companion object {

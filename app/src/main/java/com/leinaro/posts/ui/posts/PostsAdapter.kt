@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
+import com.leinaro.posts.datasources.remote.Posts
 
-class PostsAdapter(private val postDataset: Array<String>) :
+class PostsAdapter(private var postDataset: Array<String>) :
     RecyclerView.Adapter<PostsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup,
@@ -20,4 +21,10 @@ class PostsAdapter(private val postDataset: Array<String>) :
     }
 
     override fun getItemCount() = postDataset.size
+
+    fun setDataSet(postsList: List<Posts>){
+        postDataset = postsList.map {
+            it.body
+        }.toTypedArray()
+    }
 }
