@@ -17,33 +17,37 @@ import com.leinaro.posts.ui.main.handler.ShowAllPostsHandler
 import com.leinaro.posts.utils.ViewDataState
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mainViewDataState = MutableLiveData<ViewDataState<MainViewDataState>>()
-    private val repository: PostRepository = RepositoryImpl(Service(JSONPlaceHolderClient().jphService))
+    private val repository: PostRepository =
+        RepositoryImpl(Service(JSONPlaceHolderClient().jphService))
 
     init {
         getAllPost()
     }
 
-    fun getViewData() : LiveData<ViewDataState<MainViewDataState>> = mainViewDataState
+    fun getViewData(): LiveData<ViewDataState<MainViewDataState>> = mainViewDataState
 
-    private fun getAllPost(){
+    private fun getAllPost() {
         viewModelScope.launch {
-            when(val result = repository.getAllPost()){
-                is Result.Success ->{
+            when (val result = repository.getAllPost()) {
+                is Result.Success -> {
                     showPosts(result.data)
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
     }
 
     private fun showPosts(result: List<Posts>) {
-        mainViewDataState.postValue(ViewDataState(
-            ShowAllPosts(result),
-            ShowAllPostsHandler
-        ))
+        mainViewDataState.postValue(
+            ViewDataState(
+                ShowAllPosts(result),
+                ShowAllPostsHandler
+            )
+        )
     }
 
 }

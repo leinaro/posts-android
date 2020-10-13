@@ -1,11 +1,13 @@
 package com.leinaro.posts.datasources.remote
 
-data class Posts (
+import java.io.Serializable
+
+data class Posts(
     val userId: Int,
     val id: Int,
     val title: String,
     val body: String
-) {
+) : Serializable {
     var isRead: Boolean = false
 }
 

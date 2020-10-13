@@ -12,14 +12,15 @@ import com.leinaro.posts.utils.ViewHandler
 object ShowAllPostsHandler : ViewHandler<ShowAllPosts> {
 
     override fun ShowAllPosts.perform(context: Either<Activity, Fragment>) {
-        context.map {fragment ->
+        context.map { fragment ->
             fragment as ViewPagerFragment
             setViewPagerAdapter(fragment, this.posts)
         }
     }
 
-    private fun setViewPagerAdapter(fragment: ViewPagerFragment, postsList: List<Posts>){
-        val allPostsFragment = fragment.childFragmentManager.findFragmentByTag("f" + 0) as? PostsFragment
+    private fun setViewPagerAdapter(fragment: ViewPagerFragment, postsList: List<Posts>) {
+        val allPostsFragment =
+            fragment.childFragmentManager.findFragmentByTag("f" + 0) as? PostsFragment
         allPostsFragment?.setPosts(postsList)
     }
 }

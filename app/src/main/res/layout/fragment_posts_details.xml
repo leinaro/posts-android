@@ -34,7 +34,6 @@
         app:layout_constraintTop_toBottomOf="@+id/description_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
         tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." />
 
     <TextView
@@ -53,7 +52,6 @@
         app:layout_constraintTop_toBottomOf="@+id/user_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
         android:padding="8dp"
         tools:text="Name" />
 
@@ -64,7 +62,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Email"
         tools:text="Email" />
 
     <TextView
@@ -73,7 +70,6 @@
         app:layout_constraintTop_toBottomOf="@+id/usermail_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Phone"
         android:padding="8dp"
         tools:text="Phone" />
 
@@ -84,7 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Website"
         tools:text="Website" />
 
     <TextView
@@ -100,5 +95,11 @@
         android:padding="8dp"
         android:text="@string/comments"
         tools:text="Comments" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments_list"
+        app:layout_constraintTop_toBottomOf="@+id/comments_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

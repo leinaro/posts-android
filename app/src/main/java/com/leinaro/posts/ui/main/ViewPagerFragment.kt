@@ -1,6 +1,5 @@
 package com.leinaro.posts.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -27,7 +26,6 @@ class ViewPagerFragment : Fragment() {
     )
 
     private val mainViewModel: MainViewModel by viewModels()
-
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -73,7 +71,7 @@ class ViewPagerFragment : Fragment() {
     //</editor-fold>
 
     //<editor-fold desc="private methods">
-    private fun setViewPagerAdapter(){
+    private fun setViewPagerAdapter() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this, TAB_TITLES)
         view_pager.adapter = sectionsPagerAdapter
         TabLayoutMediator(tabs, view_pager) { tab, position ->
@@ -81,14 +79,14 @@ class ViewPagerFragment : Fragment() {
         }.attach()
     }
 
-    private fun setFloatButtonAction(){
+    private fun setFloatButtonAction() {
         delete_all.setOnClickListener { view ->
             Snackbar.make(view, "Delete all?", Snackbar.LENGTH_LONG)
                 .setAction("Delete", deleteAll).show()
         }
     }
 
-    private fun setObservers(){
+    private fun setObservers() {
         mainViewModel.getViewData().observe(this.viewLifecycleOwner, Observer {
             handleViewData(it.first, it.second as ViewHandler<MainViewDataState>)
         })

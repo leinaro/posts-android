@@ -4,7 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.leinaro.posts.ui.posts.PostsFragment
 
-class SectionsPagerAdapter(private val context: Fragment, private val tabTitles: Array<Int>) : FragmentStateAdapter(context) {
+class SectionsPagerAdapter(private val context: Fragment, private val tabTitles: Array<Int>) :
+    FragmentStateAdapter(context) {
 
     override fun getItemCount(): Int {
         return tabTitles.size

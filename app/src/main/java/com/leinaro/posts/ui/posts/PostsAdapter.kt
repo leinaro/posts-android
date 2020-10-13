@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
@@ -14,19 +13,23 @@ import com.leinaro.posts.datasources.remote.Posts
 class PostsAdapter(private var postDataset: Array<Posts>) :
     RecyclerView.Adapter<PostsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): PostsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.posts_item, parent, false) as ConstraintLayout
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): PostsViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.posts_item, parent, false) as ConstraintLayout
         return PostsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PostsViewHolder, position: Int) {
         holder.textView.text = postDataset[position].body
         val posts = postDataset[position]
-        holder.view.setOnClickListener{
+        holder.view.setOnClickListener {
             posts.isRead = true
             holder.identifier.visibility = View.INVISIBLE
-            val bundle = bundleOf("posts" to "")
+            val bundle = bundleOf()
+            bundle.putSerializable("posts", posts)
             holder.view.findNavController().navigate(
                 R.id.action_PostsFragment_to_PostsDetailsFragment,
                 bundle
@@ -40,7 +43,7 @@ class PostsAdapter(private var postDataset: Array<Posts>) :
 
     override fun getItemCount() = postDataset.size
 
-    fun setDataSet(postsList: List<Posts>){
+    fun setDataSet(postsList: List<Posts>) {
         postDataset = postsList.toTypedArray()
     }
 }
