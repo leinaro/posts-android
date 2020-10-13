@@ -25,7 +25,7 @@ class ViewPagerFragment : Fragment() {
         R.string.tab_favorites
     )
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -64,9 +64,14 @@ class ViewPagerFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.refresh_action_menu -> true
+            R.id.refresh_action_menu -> refreshPost()
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun refreshPost(): Boolean {
+        viewModel.getAllPost()
+        return true
     }
     //</editor-fold>
 
@@ -87,13 +92,13 @@ class ViewPagerFragment : Fragment() {
     }
 
     private fun setObservers() {
-        mainViewModel.getViewData().observe(this.viewLifecycleOwner, Observer {
+        viewModel.getViewData().observe(this.viewLifecycleOwner, Observer {
             handleViewData(it.first, it.second as ViewHandler<MainViewDataState>)
         })
     }
 
     private val deleteAll: View.OnClickListener = View.OnClickListener {
-        //TODO: viewModel.deleteAll()
+        viewModel.deleteAll()
     }
     //</editor-fold>
 

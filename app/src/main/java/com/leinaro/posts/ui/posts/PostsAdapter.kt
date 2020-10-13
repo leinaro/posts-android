@@ -1,5 +1,6 @@
 package com.leinaro.posts.ui.posts
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,18 +8,23 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.leinaro.posts.R
 import com.leinaro.posts.datasources.remote.Posts
 
-class PostsAdapter(private var postDataset: Array<Posts>) :
+
+class PostsAdapter(private var postDataset: MutableList<Posts>) :
     RecyclerView.Adapter<PostsViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PostsViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.posts_item, parent, false) as ConstraintLayout
+        val view = LayoutInflater.from(
+            parent.context
+        ).inflate(
+            R.layout.posts_item, parent, false
+        ) as ConstraintLayout
         return PostsViewHolder(view)
     }
 
@@ -44,6 +50,33 @@ class PostsAdapter(private var postDataset: Array<Posts>) :
     override fun getItemCount() = postDataset.size
 
     fun setDataSet(postsList: List<Posts>) {
-        postDataset = postsList.toTypedArray()
+        postDataset = postsList.toMutableList()
+    }
+
+    fun deleteItem(position: Int, viewHolder: RecyclerView.ViewHolder) {
+        //val deletedPost = postDataset[position]
+        //val lastdeletedposition = position
+        postDataset.removeAt(position)
+        notifyItemRemoved(position)
+        showUndoSnackbar(viewHolder)
+    }
+
+    private fun showUndoSnackbar(viewHolder: RecyclerView.ViewHolder) {
+
+        val view: View = viewHolder.itemView.rootView
+        val snackbar: Snackbar = Snackbar.make(
+            view, "Undo revome post?",
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction("UNDO") { v -> undoDelete() }
+        snackbar.show()
+    }
+
+    private fun undoDelete() {
+        /*mListItems.add(
+            mRecentlyDeletedItemPosition,
+            mRecentlyDeletedItem
+        )
+        notifyItemInserted(mRecentlyDeletedItemPosition)*/
     }
 }

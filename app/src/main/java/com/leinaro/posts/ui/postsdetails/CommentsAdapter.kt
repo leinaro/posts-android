@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
 import com.leinaro.posts.datasources.remote.Comment
 
-class CommentsAdapter(private var comments: Array<Comment>): RecyclerView.Adapter<CommentsViewHolder>() {
+class CommentsAdapter(private var comments: Array<Comment>) :
+    RecyclerView.Adapter<CommentsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent,false) as ConstraintLayout
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.comment_item, parent, false) as ConstraintLayout
         return CommentsViewHolder(view)
     }
 

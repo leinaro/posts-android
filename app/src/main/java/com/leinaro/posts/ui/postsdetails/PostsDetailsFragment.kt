@@ -63,7 +63,7 @@ class PostsDetailsFragment : Fragment() {
         viewModel.setArgument(arguments)
     }
 
-    private fun setCommetsAdapter(){
+    private fun setCommetsAdapter() {
         viewManager = LinearLayoutManager(this.context)
         viewAdapter = CommentsAdapter(arrayOf())
         this.comments_list.apply {

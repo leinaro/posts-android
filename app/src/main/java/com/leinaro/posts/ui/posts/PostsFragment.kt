@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
 import com.leinaro.posts.datasources.remote.Posts
 import com.leinaro.posts.ui.main.PageViewModel
 import kotlinx.android.synthetic.main.fragment_posts.*
+
 
 /**
  * The fragment argument representing the section name for this fragment.
@@ -29,6 +31,7 @@ private const val ARG_SECTION_NUMBER = "section_number"
  */
 class PostsFragment : Fragment() {
 
+    private lateinit var callback: SwipeToDeleteCallback
     private lateinit var viewAdapter: PostsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
@@ -48,7 +51,7 @@ class PostsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewManager = LinearLayoutManager(this.context)
 
-        viewAdapter = PostsAdapter(arrayOf())
+        viewAdapter = PostsAdapter(mutableListOf())
 
         this.posts_list.apply {
             // use this setting to improve performance if you know that changes
@@ -57,6 +60,9 @@ class PostsFragment : Fragment() {
             layoutManager = viewManager
             addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
             adapter = viewAdapter
+
+            val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(viewAdapter, this.context))
+            itemTouchHelper.attachToRecyclerView(posts_list)
         }
     }
 

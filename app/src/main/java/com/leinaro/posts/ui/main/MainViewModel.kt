@@ -29,7 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getViewData(): LiveData<ViewDataState<MainViewDataState>> = mainViewDataState
 
-    private fun getAllPost() {
+    fun getAllPost() {
         viewModelScope.launch {
             when (val result = repository.getAllPost()) {
                 is Result.Success -> {
@@ -45,6 +45,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         mainViewDataState.postValue(
             ViewDataState(
                 ShowAllPosts(result),
+                ShowAllPostsHandler
+            )
+        )
+    }
+
+    fun deleteAll() {
+        mainViewDataState.postValue(
+            ViewDataState(
+                ShowAllPosts(listOf()),
                 ShowAllPostsHandler
             )
         )
