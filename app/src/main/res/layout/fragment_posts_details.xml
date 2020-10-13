@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context="com.leinaro.posts.ui.postsdetails.PostsDetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:title="Posts"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <TextView
         android:id="@+id/description_title"
         style="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:padding="8dp"
         android:text="@string/description"
         tools:text="Description" />
 
@@ -22,6 +30,7 @@
         android:id="@+id/description_body"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:lineSpacingExtra="8dp"
+        android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@+id/description_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,8 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/description_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:padding="8dp"
         tools:text="User"
         android:text="@string/user" />
 
@@ -46,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:padding="8dp"
         tools:text="Name" />
 
     <TextView
@@ -54,6 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Email"
         tools:text="Email" />
 
@@ -64,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Phone"
+        android:padding="8dp"
         tools:text="Phone" />
 
     <TextView
@@ -72,6 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userphone_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="Website"
         tools:text="Website" />
 
@@ -85,6 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userwebsite_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:text="@string/comments"
         tools:text="Comments" />
 

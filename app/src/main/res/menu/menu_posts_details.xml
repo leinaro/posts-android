@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.leinaro.posts.com.leinaro.posts.MainActivity">
+
+    <item
+        android:id="@+id/add_favorite_action_menu"
+        android:title="@string/favorite"
+        app:showAsAction="always"
+        android:visible="false"
+        android:icon="@drawable/ic_remove_favorite" />
+
+    <item
+        android:id="@+id/remove_favorite_action_menu"
+        android:title="@string/favorite"
+        app:showAsAction="always"
+        android:visible="true"
+        android:icon="@drawable/ic_add_favorite" />
+
+</menu>
