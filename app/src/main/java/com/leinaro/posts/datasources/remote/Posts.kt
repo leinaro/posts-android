@@ -8,6 +8,7 @@ data class Posts(
     val title: String,
     val body: String
 ) : Serializable {
+    var isFavorite: Boolean = false
     var isRead: Boolean = false
 }
 

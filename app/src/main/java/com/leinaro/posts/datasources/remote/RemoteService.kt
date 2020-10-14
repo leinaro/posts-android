@@ -14,12 +14,6 @@ class Service(private val jphService: JPHService) : RemoteService {
 
     override suspend fun getAllPostsFromJPH() = jphService.getAllPosts()
 
-    /* override suspend fun getPostDetails(posts: Posts): Flow<PostsDetails> = flowOf(
-    jphService.getUser(posts.userId.toString()))
-             .zip(flowOf(jphService.getComments(posts.id.toString()))) { user, list ->
-                 PostsDetails(user, list)
-             }
-     }*/
     override suspend fun getPostDetails(posts: Posts): PostsDetails =
         withContext(Dispatchers.IO) {
             val user = async { jphService.getUser(posts.userId.toString()) }

@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.leinaro.posts.datasources.local.DatabaseClient
+import com.leinaro.posts.datasources.local.Favorite
 import com.leinaro.posts.datasources.remote.JSONPlaceHolderClient
 import com.leinaro.posts.datasources.remote.Posts
 import com.leinaro.posts.datasources.remote.Service
@@ -20,8 +22,10 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mainViewDataState = MutableLiveData<ViewDataState<MainViewDataState>>()
-    private val repository: PostRepository =
-        RepositoryImpl(Service(JSONPlaceHolderClient().jphService))
+    private val repository: PostRepository = RepositoryImpl(
+        Service(JSONPlaceHolderClient.jphService),
+        DatabaseClient(application).db
+    )
 
     init {
         getAllPost()
@@ -33,7 +37,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             when (val result = repository.getAllPost()) {
                 is Result.Success -> {
-                    showPosts(result.data)
+                    showPosts(result.data, repository.getAllFavorites())
                 }
                 else -> {
                 }
@@ -41,7 +45,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun showPosts(result: List<Posts>) {
+    private fun showPosts(
+        result: List<Posts>,
+        allFavorites: List<Favorite>
+    ) {
+        result.map { post ->
+            post.isFavorite = allFavorites.filter {
+                post.id == it.postId
+            }.isNotEmpty()
+        }
         mainViewDataState.postValue(
             ViewDataState(
                 ShowAllPosts(result),

@@ -8,13 +8,13 @@
         android:title="@string/favorite"
         app:showAsAction="always"
         android:visible="false"
-        android:icon="@drawable/ic_remove_favorite" />
+        android:icon="@drawable/ic_add_favorite" />
 
     <item
         android:id="@+id/remove_favorite_action_menu"
         android:title="@string/favorite"
         app:showAsAction="always"
         android:visible="true"
-        android:icon="@drawable/ic_add_favorite" />
+        android:icon="@drawable/ic_remove_favorite" />
 
 </menu>

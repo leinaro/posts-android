@@ -31,20 +31,13 @@ class PostsAdapter(private var postDataset: MutableList<Posts>) :
     override fun onBindViewHolder(holder: PostsViewHolder, position: Int) {
         holder.textView.text = postDataset[position].body
         val posts = postDataset[position]
-        holder.view.setOnClickListener {
-            posts.isRead = true
-            holder.identifier.visibility = View.INVISIBLE
-            val bundle = bundleOf()
-            bundle.putSerializable("posts", posts)
-            holder.view.findNavController().navigate(
-                R.id.action_PostsFragment_to_PostsDetailsFragment,
-                bundle
-            )
-        }
+        holder.view.setOnClickListener(onPostClickListener(posts, holder))
+        holder.favorite.visibility = if (posts.isFavorite)  View.VISIBLE else View.GONE
+
         if (position < 20 && !posts.isRead)
             holder.identifier.visibility = View.VISIBLE
         else
-            holder.identifier.visibility = View.INVISIBLE
+            holder.identifier.visibility = View.GONE
     }
 
     override fun getItemCount() = postDataset.size
@@ -78,5 +71,16 @@ class PostsAdapter(private var postDataset: MutableList<Posts>) :
             mRecentlyDeletedItem
         )
         notifyItemInserted(mRecentlyDeletedItemPosition)*/
+    }
+
+    private fun onPostClickListener(posts: Posts, holder: PostsViewHolder) = View.OnClickListener {
+        posts.isRead = true
+        holder.identifier.visibility = View.GONE
+        val bundle = bundleOf()
+        bundle.putSerializable("posts", posts)
+        holder.view.findNavController().navigate(
+            R.id.action_PostsFragment_to_PostsDetailsFragment,
+            bundle
+        )
     }
 }

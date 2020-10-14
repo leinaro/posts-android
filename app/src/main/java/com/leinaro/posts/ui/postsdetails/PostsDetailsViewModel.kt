@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.leinaro.posts.datasources.local.DatabaseClient
+import com.leinaro.posts.datasources.local.Favorite
 import com.leinaro.posts.datasources.remote.JSONPlaceHolderClient
 import com.leinaro.posts.datasources.remote.Posts
 import com.leinaro.posts.datasources.remote.Service
@@ -13,9 +15,8 @@ import com.leinaro.posts.repository.PostsDetails
 import com.leinaro.posts.repository.RepositoryImpl
 import com.leinaro.posts.repository.Result
 import com.leinaro.posts.repository.main.PostRepository
-import com.leinaro.posts.repository.postsdetails.PostsDetailsViewDataState
-import com.leinaro.posts.repository.postsdetails.ShowPostBody
-import com.leinaro.posts.repository.postsdetails.ShowPostDetails
+import com.leinaro.posts.repository.postsdetails.*
+import com.leinaro.posts.ui.postsdetails.handler.ShowFavoriteHandler
 import com.leinaro.posts.ui.postsdetails.handler.ShowPostBodyHandler
 import com.leinaro.posts.ui.postsdetails.handler.ShowPostDestilsHandler
 import com.leinaro.posts.utils.ViewDataState
@@ -23,14 +24,20 @@ import kotlinx.coroutines.launch
 
 class PostsDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
+    private lateinit var post: Posts
+    var isFavorite: Boolean = false
+
     private val viewDataState = MutableLiveData<ViewDataState<PostsDetailsViewDataState>>()
-    private val repository: PostRepository =
-        RepositoryImpl(Service(JSONPlaceHolderClient().jphService))
+    private val repository: PostDetailsRepository = RepositoryImpl(
+        Service(JSONPlaceHolderClient.jphService),
+        DatabaseClient(application).db
+    )
 
     fun getViewData(): LiveData<ViewDataState<PostsDetailsViewDataState>> = viewDataState
+
     fun setArgument(arguments: Bundle?) {
         arguments?.let {
-            val post = arguments.getSerializable("posts") as Posts
+            post = arguments.getSerializable("posts") as Posts
             viewDataState.postValue(
                 ViewDataState(
                     ShowPostBody(post),
@@ -50,6 +57,7 @@ class PostsDetailsViewModel(application: Application) : AndroidViewModel(applica
                 else -> {
                 }
             }
+            isFavorite(repository.getFavorite(posts.id))
         }
     }
 
@@ -62,4 +70,28 @@ class PostsDetailsViewModel(application: Application) : AndroidViewModel(applica
         )
     }
 
+    fun addToFavorite(): Boolean {
+        viewModelScope.launch {
+            repository.addFavorite(post.id)
+        }
+        isFavorite(true)
+        return true
+    }
+
+    fun removeFromFavorite(): Boolean {
+        viewModelScope.launch {
+            repository.removeFavorite(post.id)
+        }
+        isFavorite(false)
+        return true
+    }
+
+    private fun isFavorite(isFavorite: Boolean){
+        viewDataState.postValue(
+            ViewDataState(
+                ShowFavorite(isFavorite),
+                ShowFavoriteHandler
+            )
+        )
+    }
 }

@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
-class JSONPlaceHolderClient {
+object JSONPlaceHolderClient {
 
     val jphService: JPHService = getRetrofit().create(JPHService::class.java)
 

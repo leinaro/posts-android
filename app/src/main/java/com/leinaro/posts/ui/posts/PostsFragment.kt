@@ -31,7 +31,6 @@ private const val ARG_SECTION_NUMBER = "section_number"
  */
 class PostsFragment : Fragment() {
 
-    private lateinit var callback: SwipeToDeleteCallback
     private lateinit var viewAdapter: PostsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 

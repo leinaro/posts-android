@@ -48,9 +48,31 @@ class PostsDetailsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.add_favorite_action_menu -> viewModel.addToFavorite()
+            R.id.remove_favorite_action_menu -> viewModel.removeFromFavorite()
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val itemAddFavorite = menu.findItem(R.id.add_favorite_action_menu)
+        val itemRemoveFavorite = menu.findItem(R.id.remove_favorite_action_menu)
+        itemAddFavorite.isVisible = !viewModel.isFavorite
+        itemRemoveFavorite.isVisible = viewModel.isFavorite
+        super.onPrepareOptionsMenu(menu)
+    }
+    fun showAddToFavoriteIcon(): Boolean {
+        viewModel.isFavorite = true
+        activity?.invalidateOptionsMenu()
+        return true
+    }
+
+    fun showRemoveToFavoriteIcon(): Boolean {
+        viewModel.isFavorite = false
+        activity?.invalidateOptionsMenu()
+        return true
+    }
+
 
     //<editor-fold desc="private methods">
     private fun setObservers() {

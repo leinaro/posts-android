@@ -9,4 +9,5 @@ import kotlinx.android.synthetic.main.posts_item.view.*
 class PostsViewHolder(val view: ConstraintLayout) : RecyclerView.ViewHolder(view) {
     val textView: TextView = view.text_view
     val identifier: ImageView = view.new_identifier
+    val favorite: ImageView = view.favorites
 }
