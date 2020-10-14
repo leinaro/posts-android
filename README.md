@@ -6,6 +6,15 @@ This projects is made in kotlin and use the MVVM architecture, use retrofit and 
 
 This application compile with android API 30 and supports min Android API 22.
 
+## How to use
+### Using Android Studio
+1. clone the project ```git clone git@bitbucket.org:Leinaro/posts-android.git```
+2. Open an existing project and select the cloned project
+3. Run the application in a device or emulator.
+
+### Using Apk
+Download the [apk](https://bitbucket.org/Leinaro/posts-android/src/master/debug%20apk/app-debug.apk) in your device or drag the downloaded apk to the emulator.
+
 ## Tech
 ### UI
 - [navigation component](https://developer.android.com/guide/navigation/navigation-getting-started)
