@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.leinaro.posts.R
 import com.leinaro.posts.datasources.remote.Posts
 import com.leinaro.posts.ui.main.PageViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 
@@ -29,20 +30,20 @@ private const val ARG_SECTION_NUMBER = "section_number"
 /**
  * A fragment containing a recyclerview with posts.
  */
+@AndroidEntryPoint
 class PostsFragment : Fragment() {
 
     private lateinit var viewAdapter: PostsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    private lateinit var pageViewModel: PageViewModel
+    private val pageViewModel: PageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
+        pageViewModel.setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 

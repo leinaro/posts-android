@@ -11,13 +11,14 @@ import com.leinaro.posts.R
 import com.leinaro.posts.repository.main.MainViewDataState
 import com.leinaro.posts.utils.ViewHandler
 import com.leinaro.posts.utils.handleViewData
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_view_pager.*
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
+@AndroidEntryPoint
 class ViewPagerFragment : Fragment() {
 
     private val TAB_TITLES = arrayOf(

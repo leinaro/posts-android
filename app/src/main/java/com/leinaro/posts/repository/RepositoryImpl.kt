@@ -2,7 +2,6 @@ package com.leinaro.posts.repository
 
 import com.leinaro.posts.datasources.local.Favorite
 import com.leinaro.posts.datasources.local.FavoriteDao
-import com.leinaro.posts.datasources.local.PostDatabase
 import com.leinaro.posts.datasources.local.PostsDao
 import com.leinaro.posts.datasources.remote.Comment
 import com.leinaro.posts.datasources.remote.Posts
@@ -14,6 +13,7 @@ import com.leinaro.posts.utils.toLocalPost
 import com.leinaro.posts.utils.toRemotePost
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 sealed class Result<out R> {
     data class Success<out T>(val data: T) : Result<T>()
@@ -22,17 +22,15 @@ sealed class Result<out R> {
 
 typealias PostsDetails = Pair<User, List<Comment>>
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor(
     private val remoteService: RemoteService,
-    private val db : PostDatabase
+    private val postsDao: PostsDao,
+    private val favoriteDao: FavoriteDao
 ) : PostRepository, PostDetailsRepository {
-
-    private val postsDao: PostsDao = db.postDao()
-    private val favoriteDao: FavoriteDao = db.favoriteDao()
 
     override suspend fun getAllPost(): Result<List<Posts>> {
         return try {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 Result.Success(data = getAllPosts())
             }
         } catch (exception: Exception) {
@@ -61,23 +59,23 @@ class RepositoryImpl(
     }
 
     override suspend fun addFavorite(postId: Int) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             favoriteDao.insert(Favorite(postId))
         }
     }
 
 
     override suspend fun removeFavorite(postId: Int) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             favoriteDao.deleteByPostId(postId)
         }
     }
 
-    override suspend fun getFavorite(postId: Int) : Boolean{
-        return withContext(Dispatchers.IO){
+    override suspend fun getFavorite(postId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
             try {
                 favoriteDao.getFavoriteByIds(postId).isNotEmpty()
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 false
             }
         }
@@ -90,7 +88,7 @@ class RepositoryImpl(
                 it.toLocalPost()
             })
             data
-        }catch (e: Exception){
+        } catch (e: Exception) {
             postsDao.getAllPosts().map {
                 it.toRemotePost()
             }

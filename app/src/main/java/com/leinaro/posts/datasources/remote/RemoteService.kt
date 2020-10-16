@@ -4,13 +4,14 @@ import com.leinaro.posts.repository.PostsDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 interface RemoteService {
     suspend fun getAllPostsFromJPH(): List<Posts>
     suspend fun getPostDetails(posts: Posts): PostsDetails
 }
 
-class Service(private val jphService: JPHService) : RemoteService {
+class Service @Inject constructor(private val jphService: JPHService) : RemoteService {
 
     override suspend fun getAllPostsFromJPH() = jphService.getAllPosts()
 

@@ -1,7 +1,9 @@
 package com.leinaro.posts.datasources.local
 
-import androidx.room.*
-import com.leinaro.posts.datasources.remote.Posts
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface PostsDao {
@@ -10,5 +12,5 @@ interface PostsDao {
     fun getAllPosts(): List<Post>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(posts : List<Post>)
+    fun insertAll(posts: List<Post>)
 }

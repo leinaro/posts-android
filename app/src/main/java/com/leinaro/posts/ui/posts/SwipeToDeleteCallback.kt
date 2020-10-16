@@ -43,8 +43,8 @@ class SwipeToDeleteCallback(private val adapter: PostsAdapter, val context: Cont
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         val itemView: View = viewHolder.itemView
 
-   //     setBackground(dX, itemView, c)
-        setRemoveIcon(itemView, dX,c)
+        //     setBackground(dX, itemView, c)
+        setRemoveIcon(itemView, dX, c)
     }
 
     private fun setBackground(
@@ -74,7 +74,7 @@ class SwipeToDeleteCallback(private val adapter: PostsAdapter, val context: Cont
         background.draw(c)
     }
 
-    private fun setRemoveIcon(itemView: View, dX: Float, c: Canvas){
+    private fun setRemoveIcon(itemView: View, dX: Float, c: Canvas) {
         val backgroundCornerOffset = 20
         val iconMargin = (itemView.height - icon!!.intrinsicHeight) / 2
         val iconTop = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
@@ -84,9 +84,9 @@ class SwipeToDeleteCallback(private val adapter: PostsAdapter, val context: Cont
             dX > 0 -> { // Swiping to the right
 
                 val iconLeft = itemView.left + iconMargin
-                val iconRight = iconLeft+ icon.intrinsicWidth
+                val iconRight = iconLeft + icon.intrinsicWidth
 
-                if (dX > 100){
+                if (dX > 100) {
                     icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
                 } else {
                     icon.setBounds(0, 0, 0, 0)
@@ -102,7 +102,7 @@ class SwipeToDeleteCallback(private val adapter: PostsAdapter, val context: Cont
                 val iconLeft = itemView.right - iconMargin - icon.intrinsicWidth
                 val iconRight = itemView.right - iconMargin
 
-                if (dX < -100){
+                if (dX < -100) {
                     icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
                 } else {
                     icon.setBounds(0, 0, 0, 0)
@@ -120,7 +120,7 @@ class SwipeToDeleteCallback(private val adapter: PostsAdapter, val context: Cont
             }
         }
 
-       background.draw(c)
-       icon.draw(c)
+        background.draw(c)
+        icon.draw(c)
     }
 }

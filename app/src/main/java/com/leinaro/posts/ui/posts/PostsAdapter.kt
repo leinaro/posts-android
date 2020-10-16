@@ -1,6 +1,5 @@
 package com.leinaro.posts.ui.posts
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +31,7 @@ class PostsAdapter(private var postDataset: MutableList<Posts>) :
         holder.textView.text = postDataset[position].body
         val posts = postDataset[position]
         holder.view.setOnClickListener(onPostClickListener(posts, holder))
-        holder.favorite.visibility = if (posts.isFavorite)  View.VISIBLE else View.GONE
+        holder.favorite.visibility = if (posts.isFavorite) View.VISIBLE else View.GONE
 
         if (position < 20 && !posts.isRead)
             holder.identifier.visibility = View.VISIBLE

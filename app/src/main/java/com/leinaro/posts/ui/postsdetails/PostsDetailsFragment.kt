@@ -14,9 +14,11 @@ import com.leinaro.posts.repository.postsdetails.PostsDetailsViewDataState
 import com.leinaro.posts.ui.main.MainActivity
 import com.leinaro.posts.utils.ViewHandler
 import com.leinaro.posts.utils.handleViewData
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_posts_details.*
 import kotlinx.android.synthetic.main.fragment_view_pager.toolbar
 
+@AndroidEntryPoint
 class PostsDetailsFragment : Fragment() {
 
     private val viewModel: PostsDetailsViewModel by viewModels()
@@ -61,6 +63,7 @@ class PostsDetailsFragment : Fragment() {
         itemRemoveFavorite.isVisible = viewModel.isFavorite
         super.onPrepareOptionsMenu(menu)
     }
+
     fun showAddToFavoriteIcon(): Boolean {
         viewModel.isFavorite = true
         activity?.invalidateOptionsMenu()
